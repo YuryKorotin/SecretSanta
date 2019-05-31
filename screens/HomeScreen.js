@@ -8,17 +8,22 @@ import {
   TouchableOpacity,
   ListView,
   View,
+  Button,
+  Alert,
+  StatusBar,
+  ImageBackground
 } from 'react-native';
 import { WebBrowser } from 'expo';
-
 import { MonoText } from '../components/StyledText';
+
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export default class HomeScreen extends React.Component {
   constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(['First event', 'Second event']),
+      dataSource: ds.cloneWithRows(['Alex birhday', 'Max birthday']),
     };
   }
   static navigationOptions = {
@@ -27,35 +32,63 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-          <View style={styles.getStartedContainer}>
-            <Text style={styles.getStartedText}>List of events</Text>
-          </View>
-
-        </ScrollView>
+      <View style={{marginTop: getStatusBarHeight(), flex: 1, backgroundColor: '#fff',}}>
 
         <ListView
+          style={{flex: 3}}
           dataSource={this.state.dataSource}
           renderRow={
             (rowData) => 
+            <View>
+            
+            <ImageBackground source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}} 
+                             style={{width: '100%', height: '100%'}}>
+          
             <View style={{flex: 1, flexDirection: 'row', height: 150}}>
-              <Image
-                style={{width: 50, height: 50, marginHorizontal: 12}}
-                source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}/>
-              <View style={{flex: 1, flexDirection: 'column', height: 60}}>
-                <Text style={{marginLeft: 12}}>{rowData}</Text>
-                <Text style={{marginLeft: 12}}>{rowData}</Text>
+              <View style={{width: 380, height: 60, backgroundColor:'rgba(255, 255, 255, 0.7)', alignItems: 'center', position: 'absolute', bottom:0}}>
+                <Text style={{marginTop: 8,color: 'black'}}>{rowData}</Text>
+                <Text style={{marginTop: 8, color: 'black'}}>{new Date() + ""}</Text>
               </View>
+            </View>
+
+            </ImageBackground>
             </View>
           }
         />
 
+        <View style={{ 
+          flex: 0.15,
+          alignItems: 'center', 
+          height: 90, 
+          backgroundColor: 'blue',
+          }}>
+          <Button 
+            onPress={this._openEventCreationScreen}
+            title="NEW EVENT"
+            color="white"
+            accessibilityLabel="Create new event"
+          />
+        </View>
         <View style={styles.tabBarInfoContainer}>
       
         </View>
       </View>
+    );
+  }
+
+  _openEventCreationScreen() {
+    Alert.alert(
+      'New event creation',
+      'Do you really want to create new event?',
+      [
+        {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+        { text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => console.log('OK Pressed')}
+      ],
+      {cancelable: false},
     );
   }
 
@@ -121,8 +154,9 @@ const styles = StyleSheet.create({
     marginLeft: -10,
   },
   getStartedContainer: {
+    backgroundColor: 'blue',
     alignItems: 'center',
-    marginHorizontal: 50,
+    marginHorizontal: 10,
   },
   homeScreenFilename: {
     marginVertical: 7,
