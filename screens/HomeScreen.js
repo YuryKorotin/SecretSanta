@@ -19,6 +19,7 @@ import { MonoText } from '../components/StyledText';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export default class HomeScreen extends React.Component {
+
   constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -27,12 +28,12 @@ export default class HomeScreen extends React.Component {
     };
   }
   static navigationOptions = {
-    header: null,
+    title: "Events List",
   };
 
   render() {
     return (
-      <View style={{marginTop: getStatusBarHeight(), flex: 1, backgroundColor: '#fff',}}>
+      <View style={{flex: 1, backgroundColor: '#fff',}}>
 
         <ListView
           style={{flex: 3}}
@@ -62,8 +63,8 @@ export default class HomeScreen extends React.Component {
           height: 90, 
           backgroundColor: 'blue',
           }}>
-          <Button 
-            onPress={this._openEventCreationScreen}
+          <Button
+            onPress={() => this._navigateToNewEvent()}
             title="NEW EVENT"
             color="white"
             accessibilityLabel="Create new event"
@@ -76,20 +77,25 @@ export default class HomeScreen extends React.Component {
     );
   }
 
-  _openEventCreationScreen() {
-    Alert.alert(
-      'New event creation',
-      'Do you really want to create new event?',
-      [
-        {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-        { text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {text: 'OK', onPress: () => console.log('OK Pressed')}
-      ],
-      {cancelable: false},
-    );
+  // _openEventCreationScreen() {
+  //   Alert.alert(
+  //     'New event creation',
+  //     'Do you really want to create new event?',
+  //     [
+  //       {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+  //       { text: 'Cancel',
+  //         onPress: () => console.log('Cancel Pressed'),
+  //         style: 'cancel',
+  //       },
+  //       {text: 'OK', onPress: () => navigation.navigate('NewEvent')}
+  //     ],
+  //     {cancelable: false},
+  //   );
+  // }
+
+  _navigateToNewEvent() {
+    const {navigate} = this.props.navigation;
+    navigate('NewEvent');
   }
 
   _maybeRenderDevelopmentModeWarning() {
