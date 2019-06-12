@@ -12,7 +12,6 @@ export default class NewEventScreen extends React.Component<Props> {
       <Button
         title="Back"
         onPress={() => navigation.goBack()}>
-        <Icon name="arrow-back" />
       </Button>
     ),
   });
