@@ -61,14 +61,15 @@ export default class HomeScreen extends React.Component {
           flex: 0.15,
           alignItems: 'center', 
           height: 90, 
-          backgroundColor: 'blue',
+          backgroundColor: 'white',
           }}>
-          <Button
-            onPress={() => this._navigateToNewEvent()}
-            title="NEW EVENT"
-            color="white"
-            accessibilityLabel="Create new event"
-          />
+
+          <TouchableOpacity
+            style={styles.newEventButton}
+            activeOpacity = { .5 }
+            onPress={ this._navigateToNewEvent }>
+            <Text style={styles.TextStyle}> NEW EVENT </Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.tabBarInfoContainer}>
       
@@ -77,6 +78,7 @@ export default class HomeScreen extends React.Component {
     );
   }
 
+  //
   // _openEventCreationScreen() {
   //   Alert.alert(
   //     'New event creation',
@@ -174,6 +176,22 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.05)',
     borderRadius: 3,
     paddingHorizontal: 4,
+  },
+  newEventButton: {
+    marginTop: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    marginLeft: 30,
+    marginRight: 30,
+    marginBottom: 15,
+    backgroundColor:'#3D70A6',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#3D70A6'
+  },
+  TextStyle:{
+      color:'#fff',
+      textAlign:'center',
   },
   getStartedText: {
     fontSize: 17,
