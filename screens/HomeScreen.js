@@ -58,16 +58,16 @@ export default class HomeScreen extends React.Component {
         />
 
         <View style={{ 
-          flex: 0.15,
+          flex: 0.20,
           alignItems: 'center', 
-          height: 90, 
+          height: 120, 
           backgroundColor: 'white',
           }}>
 
           <TouchableOpacity
             style={styles.newEventButton}
             activeOpacity = { .5 }
-            onPress={ this._navigateToNewEvent }>
+            onPress={() => this._navigateToNewEvent()}>
             <Text style={styles.TextStyle}> NEW EVENT </Text>
           </TouchableOpacity>
         </View>
@@ -178,11 +178,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   newEventButton: {
-    marginTop: 10,
+    alignSelf: "stretch", 
+    marginTop: 16,
     paddingTop: 15,
     paddingBottom: 15,
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 15,
+    marginRight: 15,
     marginBottom: 15,
     backgroundColor:'#3D70A6',
     borderRadius: 5,
